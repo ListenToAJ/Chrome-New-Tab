@@ -1,6 +1,6 @@
 {
     "name": "AJ's New Tab",
-    "version": "1.0",
+    "version": "1.1",
     "manifest_version": 2,
     "description": "AJ's Clean New Tab",
     "chrome_url_overrides": {
@@ -15,6 +15,10 @@
       "storage"
     ],
     "icons": {
-           "16": "images/icon16.png",
-           "48": "images/icon48.png"}
+           "48": "images/icon48.png"
+    },"browser_action": {
+    "default_icon": "images/icon48.png",
+    "16": "images/blue.png"
+  }
+
 }
