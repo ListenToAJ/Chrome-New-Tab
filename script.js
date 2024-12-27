@@ -391,7 +391,7 @@ setTimeout(                                                                     
             vy += ay;                                                           //Dynamics
             n = $('#circle').css('bottom');                                     //Assign pixel count from bottom to 'n'
             n = PXtoNumber (n);                                                 //Uses function (PXtoNumber)
-            $('#counter').html(n);                                              //Write the 'n' in the #counter div
+            // $('#counter').html(n);                                              //Write the 'n' in the #counter div
             if (y <= 0) {                                                       //If it goes under or is at 0...
               vy = 0;                                                           //Make it still
               ay = 0;                                                           //Make it still
@@ -429,13 +429,13 @@ setTimeout(                                                                     
             backMode = backMode + 1;                                            //Change backMode
             if(backMode % 2 == 0){                                              //If backMode is even
               $('body,#wrapper').animate({backgroundColor:'#fffaf4'});          //Brighten background
-              $(this).animate({backgroundColor:'#333333'});                     //Darken button
-              $('#counter').animate({color:'#333333'});                         //Darken counter
-              $('.corner').animate({borderColor:'#333333'});                    //Darken corner
+              $(this).animate({backgroundColor:'#000000'});                     //Darken button
+              $('#counter').animate({color:'#000000'});                         //Darken counter
+              $('.corner').animate({borderColor:'#000000'});                    //Darken corner
               $("#wrapper").animate({color: 'rgba(1, 1, 1, 0.05)'});            //Darken clock
             }                                                                   //Close out if statement
             else{                                                               //If backMode is odd (else)
-              $('body,#wrapper').animate({backgroundColor:'#333333'});          //Darken background
+              $('body,#wrapper').animate({backgroundColor:'#000000'});          //Darken background
               $(this).animate({backgroundColor:'#fffaf4'});                     //Brighten button
               $('#counter').animate({color:'#fffaf4'});                         //Brighten counter
               $('.corner').animate({borderColor:'#fffaf4'});                    //Brighten corner
@@ -749,7 +749,11 @@ setTimeout(                                                                     
           }
       //Code: blkb        Event: Open Blackboard                            Chec
           if (typedString == 'blkb') {
-            window.location = 'https://blackboard.middlesex.mass.edu/webapps/login/'
+            window.location = 'https://lowell.umassonline.net/ultra/institution-page'
+          }
+      //Code: uml        Event: Open UML email                              Chec
+          if (typedString == 'uml') {
+            window.location = 'https://www.uml.edu/it/services/microsoft-365.aspx'
           }
       //Code: wgb         Event: Open WeGoBuy                               Chec
           if (typedString == 'wgb') {
@@ -797,6 +801,13 @@ setTimeout(                                                                     
           }                                                                     //Close out function
         );
 
+        $('#search').keyup(function(e) {
+          if(e.keyCode == 13) {
+            const searchTerm = $('#search').val();
+            const newUrl = `https://www.google.com/search?q=${searchTerm}+reddit`; 
+            window.location.href = newUrl; 
+          }
+        });        
 //Schedule ---------------------------------------------------------------------
         $('#schedule').click(                                                   //When you click on the schedule
           function() {                                                          //... (function)

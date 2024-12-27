@@ -36,9 +36,20 @@
       <!-- <img id=schedule src=images/collegeSchedule.png> -->
       <div id="switchball" class="switch"></div>
       <div id="switchback" class="switch"></div>
-      <form method="get" action="https://www.google.com/search">
+      <!-- <form method="get" action="https://www.google.com/search"> -->
         <input type="text" name="q" size="31" value="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="search">
-      </form>
+        <!-- <script>
+          const searchInput = document.getElementById('search');
+          searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              const searchTerm = searchInput.value;
+              const newUrl = `https://www.google.com/search?q=${searchTerm}+Reddit`; 
+              window.location.href = newUrl; 
+            }
+          });
+        </script> -->
+      <!-- </form> -->
       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="debug" placeholder="Run code here">
       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" id="divider" placeholder="Rename tab here">
       <form method="get" action="https://tools.usps.com/go/TrackConfirmAction">

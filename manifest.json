@@ -1,6 +1,6 @@
 {
     "name": "AJ's New Tab",
-    "version": "1.1",
+    "version": "1.2",
     "manifest_version": 2,
     "description": "AJ's Clean New Tab",
     "chrome_url_overrides": {
