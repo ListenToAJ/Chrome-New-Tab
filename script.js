@@ -25,6 +25,38 @@ var searchFocus = false;                                                        
 const favicon = document.getElementById('favicon');
 
 //Functions --------------------------------------------------------------------
+function generateRandomBoldGradient() {
+  function randomBoldColor() {
+      const hue = Math.floor(Math.random() * 360);
+      const saturation = Math.floor(Math.random() * 30) + 70;
+      const lightness = Math.floor(Math.random() * 20) + 30;
+      return { hue, saturation, lightness };
+  }
+
+  function colorDifference(c1, c2) {
+      return Math.abs(c1.hue - c2.hue) + Math.abs(c1.saturation - c2.saturation) + Math.abs(c1.lightness - c2.lightness);
+  }
+
+  let color1 = randomBoldColor();
+  let color2;
+  do {
+      color2 = randomBoldColor();
+  } while (colorDifference(color1, color2) < 100);
+
+  const color1HSL = `hsl(${color1.hue}, ${color1.saturation}%, ${color1.lightness}%)`;
+  const color2HSL = `hsl(${color2.hue}, ${color2.saturation}%, ${color2.lightness}%)`;
+
+  // const isLinear = Math.random() < 0.5;
+  // if (isLinear) {
+  //     return `linear-gradient(180deg, ${color1HSL}, ${color2HSL})`;
+  // } else {
+      // return `radial-gradient(circle, ${color1HSL}, ${color2HSL})`;
+  // }
+
+  $('#circle').css({background: `radial-gradient(circle, ${color1HSL}, ${color2HSL})`})
+  $('#switchball').css({background: `${color2HSL}`})
+}
+
 var ballup = function (){                                                       //Function for ballup (for click/hover)
   vy += 2;                                                                      //Increase Velocity
   ay = -.01;                                                                    //Reset Downward Acceleration
@@ -349,34 +381,35 @@ setTimeout(                                                                     
     $(document).ready(                                                          //Starts up JQuery
       function() {                                                              //Main function
         $('.menutable').children().hide();                                      //Hide the contents of the menus
-        ballMode = localStorage.getItem('ballColor');                           //Grab the last logged ball color
-        switch(ballMode){                                                       //With that last logged ball color
-          case "red":                                                           //Check if it was red
-            changeBall('red','gradientR','#e04422', 'fast');                    //Restore the color
-          break;                                                                //Break out of the switch
-          case "green":                                                         //Check if it was green
-            changeBall('green','gradientG','#81c000', 'fast');                  //Restore the color
-          break;                                                                //Break out of the switch
-          case "blue":                                                          //Check if it was blue
-            changeBall('blue','gradientB','#22bee0', 'fast');                   //Restore the color
-          break;                                                                //Break out of the switch
-          case"bluegreen":                                                      //Check if it was bluegreen
-            changeBall('bluegreen','gradientBlueGreen','#48e4ce', 'fast');      //Restore the color
-          break;                                                                //Break out of the switch
-          case"oceanblue":                                                      //Check if it was oceanblue
-            changeBall('oceanblue','gradientOceanBlue','#0e649d', 'fast');      //Restore the color
-          break;                                                                //Break out of the switch
-          case"lilly":                                                          //Check if it was lilly
-            changeBall('lilly','gradientLilly','#a198eb', 'fast');              //Restore the color
-          break;                                                                //Break out of the switch
-        }                                                                       //Close out switch statement
-        if(localStorage.getItem(stringLights) == 'true'){                       //If String Lights are on
-          $('#stringLights').show();                                            //Show the lights
-          localStorage.setItem(stringLights, 'true');                           //Set the string lights state as on
-        }                                                                       //Close out if statement
-        else{                                                                   //If String Lights are off, null, or undefined
-          localStorage.setItem(stringLights, 'false');                          //Set the string light state as off
-        }                                                                       //Close out else statement
+        generateRandomBoldGradient()
+        // ballMode = localStorage.getItem('ballColor');                           //Grab the last logged ball color
+        // switch(ballMode){                                                       //With that last logged ball color
+        //   case "red":                                                           //Check if it was red
+        //     changeBall('red','gradientR','#e04422', 'fast');                    //Restore the color
+        //   break;                                                                //Break out of the switch
+        //   case "green":                                                         //Check if it was green
+        //     changeBall('green','gradientG','#81c000', 'fast');                  //Restore the color
+        //   break;                                                                //Break out of the switch
+        //   case "blue":                                                          //Check if it was blue
+        //     changeBall('blue','gradientB','#22bee0', 'fast');                   //Restore the color
+        //   break;                                                                //Break out of the switch
+        //   case"bluegreen":                                                      //Check if it was bluegreen
+        //     changeBall('bluegreen','gradientBlueGreen','#48e4ce', 'fast');      //Restore the color
+        //   break;                                                                //Break out of the switch
+        //   case"oceanblue":                                                      //Check if it was oceanblue
+        //     changeBall('oceanblue','gradientOceanBlue','#0e649d', 'fast');      //Restore the color
+        //   break;                                                                //Break out of the switch
+        //   case"lilly":                                                          //Check if it was lilly
+        //     changeBall('lilly','gradientLilly','#a198eb', 'fast');              //Restore the color
+        //   break;                                                                //Break out of the switch
+        // }                                                                       //Close out switch statement
+        // if(localStorage.getItem(stringLights) == 'true'){                       //If String Lights are on
+        //   $('#stringLights').show();                                            //Show the lights
+        //   localStorage.setItem(stringLights, 'true');                           //Set the string lights state as on
+        // }                                                                       //Close out if statement
+        // else{                                                                   //If String Lights are off, null, or undefined
+        //   localStorage.setItem(stringLights, 'false');                          //Set the string light state as off
+        // }                                                                       //Close out else statement
         currentTime();                                                          //Grab the current time
         setInterval(                                                            //Then after every 10 seconds
           function() {                                                          //... (function)
