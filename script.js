@@ -41,10 +41,59 @@ function generateRandomBoldGradient() {
   let color2;
   do {
       color2 = randomBoldColor();
-  } while (colorDifference(color1, color2) < 100);
+  } while (colorDifference(color1, color2) < 150);
 
   const color1HSL = `hsl(${color1.hue}, ${color1.saturation}%, ${color1.lightness}%)`;
   const color2HSL = `hsl(${color2.hue}, ${color2.saturation}%, ${color2.lightness}%)`;
+
+  function hslToRgb(h, s, l) {
+    // Convert h, s, l from [0, 360], [0, 100], [0, 100] to [0, 1]
+    s /= 100;
+    l /= 100;
+
+    const c = (1 - Math.abs(2 * l - 1)) * s; // Chroma
+    const x = c * (1 - Math.abs((h / 60) % 2 - 1)); // Intermediate value
+    const m = l - c / 2;
+
+    let r = 0, g = 0, b = 0;
+
+    if (h >= 0 && h < 60) {
+        r = c; g = x; b = 0;
+    } else if (h >= 60 && h < 120) {
+        r = x; g = c; b = 0;
+    } else if (h >= 120 && h < 180) {
+        r = 0; g = c; b = x;
+    } else if (h >= 180 && h < 240) {
+        r = 0; g = x; b = c;
+    } else if (h >= 240 && h < 300) {
+        r = x; g = 0; b = c;
+    } else if (h >= 300 && h < 360) {
+        r = c; g = 0; b = x;
+    }
+
+    // Convert RGB from [0, 1] to [0, 255]
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+
+    return [ r, g, b ]; // Return an object with r, g, b properties
+  }
+
+  function midpointColor(rgb1, rgb2) {
+    // Ensure the arrays have length 3
+    if (rgb1.length !== 3 || rgb2.length !== 3) {
+        throw new Error("Both input arrays must have exactly 3 elements.");
+    }
+
+    // Calculate the midpoint for each channel (r, g, b)
+    const r = Math.round((rgb1[0] + rgb2[0]) / 2);
+    const g = Math.round((rgb1[1] + rgb2[1]) / 2);
+    const b = Math.round((rgb1[2] + rgb2[2]) / 2);
+
+    return [r, g, b];
+  }
+
+  midpoint = midpointColor(hslToRgb(color1.hue, color1.saturation, color1.lightness), hslToRgb(color2.hue, color2.saturation, color2.lightness))
 
   // const isLinear = Math.random() < 0.5;
   // if (isLinear) {
@@ -53,8 +102,8 @@ function generateRandomBoldGradient() {
       // return `radial-gradient(circle, ${color1HSL}, ${color2HSL})`;
   // }
 
-  $('#circle').css({background: `radial-gradient(circle, ${color1HSL}, ${color2HSL})`})
-  $('#switchball').css({background: `${color2HSL}`})
+  $('#circle').css({background: `radial-gradient(circle, ${color1HSL}, ${color2HSL})`});
+  $("#switchball").css("background-color", `rgb(${midpoint[0]}, ${midpoint[1]}, ${midpoint[2]})`);
 }
 
 var ballup = function (){                                                       //Function for ballup (for click/hover)
